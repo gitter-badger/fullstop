@@ -90,8 +90,13 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.zalando.stups</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>fullstop-keypair-plugin</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>fullstop-role-plugin</artifactId>
             <version>${project.version}</version>
         </dependency>
 

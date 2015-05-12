@@ -59,8 +59,12 @@ public abstract class CloudtrailEventSupport {
 
     public static final String PUBLIC_IP_JSON_PATH = "$.instancesSet.items[*].publicIpAddress";
 
+    public static final String KEY_PAIR_JSON_PATH = "$.instancesSet.items[*].keyName";
+
     public static final String SECURITY_GROUP_IDS_JSON_PATH =
         "$.instancesSet.items[*].networkInterfaceSet.items[*].groupSet.items[*].groupId";
+
+    public static final String ROLE_NAME_JSON_PATH = "$.instancesSet.items[*].roleName";
 
     /**
      * Extracts list of imageIds from {@link CloudTrailEvent}s 'responseElements'.
@@ -111,7 +115,7 @@ public abstract class CloudtrailEventSupport {
             return null;
         }
 
-        return JsonPath.read(parameters, "$.instancesSet.items[*].keyName");
+        return JsonPath.read(parameters, KEY_PAIR_JSON_PATH);
     }
 
     /**
@@ -186,5 +190,17 @@ public abstract class CloudtrailEventSupport {
 
     public static String getRegionAsString(final CloudTrailEvent event) {
         return event.getEventData().getAwsRegion();
+    }
+
+    /**
+     * Extract the 'roleName'.
+     */
+    public static List<String> readRoleName(final String parameters) {
+
+        if (parameters == null) {
+            return null;
+        }
+
+        return JsonPath.read(parameters, ROLE_NAME_JSON_PATH);
     }
 }
